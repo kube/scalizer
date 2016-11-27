@@ -1,5 +1,5 @@
-42scalizer
-==========
+scalizer
+========
 > 42 project scale validator and harmonizer
 
 Install
