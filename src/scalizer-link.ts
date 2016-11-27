@@ -5,6 +5,13 @@ import { writeFileSync } from 'fs'
 import { safeDump } from 'js-yaml'
 import getYaml from './getYaml'
 
+command
+  .option(
+  '-o, --output <dir>',
+  'save built scale to a file'
+  )
+  .parse(process.argv)
+
 const linkScale = (header: {}, sections: {}[]) =>
   // Create a new object with header info, and sections
   safeDump(
@@ -14,14 +21,6 @@ const linkScale = (header: {}, sections: {}[]) =>
       { sections }
     )
   )
-
-command
-  .option(
-  '-o, --output <dir>',
-  'save built scale to a file'
-  )
-  .parse(process.argv)
-
 
 const [headerFiles, ...sectionsFiles] = command.args.slice(0, -1)
 
