@@ -28,7 +28,7 @@ const header = getYaml(headerFiles)
 const sections = sectionsFiles ? sectionsFiles.map(getYaml) : []
 const scale = linkScale(header, sections)
 
-if (command.options.output)
-  writeFileSync(command.options.output, scale, { encoding: 'utf8' })
+if (command.output)
+  writeFileSync(command.output, scale, { encoding: 'utf8' })
 else
   console.log(scale)
