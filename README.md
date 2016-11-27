@@ -4,33 +4,38 @@ scalizer
 
 Install
 -------
+### NPM
+```sh
+npm install --global 42scalizer
 ```
+
+### Git
+```sh
+git clone git@github.com:kube/scalizer
+cd scalizer
 npm install
-npm run build
 npm link
 ```
 
 Commands
 --------
 
-### `link`
+### Link
 **Link header file with sections**
-
 Will output a scale containing all sections.
 
 ```sh
-42scalizer link d01.info.yml exercises/*.scale.yml
+scalizer link header.yml */exercise.scale.yml
 ```
 
-
-### `harmonize`
-**Harmonize scale correction points to give a total of 100 points**
+### Harmonize
+**Harmonize scale correction points to give a total of 100 points per skill**
 ```sh
-42scalizer harmonize scale.yml
+scalizer harmonize scale.yml
 ```
 
-### `format`
-**Format scale to 42 intra scale format**
+### Format
+**Output scale to 42 intra scale format**
 ```sh
-42scalizer format scale.yml
+scalizer format scale.yml
 ```
