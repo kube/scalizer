@@ -2,6 +2,7 @@
 
 import * as command from 'commander'
 import { writeFileSync } from 'fs'
+import { safeDump } from 'js-yaml'
 import getYaml from './getYaml'
 
 import ScalizerScale, {
@@ -47,9 +48,9 @@ const formatScale =
     is_primary: true,
     lg: scale.lang,
     comment: '',
-    introduction_md: scale.introduction,
-    disclaimer_md: scale.disclaimer,
-    guidelines_md: scale.guidelines,
+    introduction_md: scale.introduction || '',
+    disclaimer_md: scale.disclaimer || '',
+    guidelines_md: scale.guidelines || '',
     correction_number: scale.number_corrections,
     duration: scale.duration,
     sections: scale.sections.map(formatSection)
@@ -62,11 +63,11 @@ command
   )
   .action((scaleFile, options) => {
     const scale = getYaml(scaleFile)
-    const formattedScale = formatScale(scale)
+    const formattedScale = safeDump(formatScale(scale))
 
     if (options.output)
       writeFileSync(options.output, formattedScale, { encoding: 'utf8' })
     else
-      console.log(scale)
+      console.log(formattedScale)
   })
   .parse(process.argv)
