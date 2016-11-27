@@ -11,7 +11,8 @@
   "license": "MIT",
   "dependencies": {
     "commander": "^2.9.0",
-    "js-yaml": "^3.7.0"
+    "js-yaml": "^3.7.0",
+    "monolite": "^0.1.6"
   },
   "devDependencies": {
     "@types/commander": "^2.3.31",
