@@ -10,29 +10,27 @@ npm run build
 npm link
 ```
 
-Usage
------
+Commands
+--------
 
 ### `link`
 **Link header file with sections**
 
 Will output a scale containing all sections.
 
-```
+```sh
 42scale link d01.info.yml exercises/*.scale.yml
 ```
-
-> First argument needs to be the project scale info
 
 
 ### `harmonize`
 **Harmonize scale correction points to give a total of 100 points**
-```
+```sh
 42scale harmonize scale.yml
 ```
 
 ### `format`
 **Format scale to 42 intra scale format**
-```
+```sh
 42scale format scale.yml
 ```
