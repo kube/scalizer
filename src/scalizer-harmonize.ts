@@ -1,11 +1,13 @@
 #! /usr/bin/env node
 
-import * as command from 'commander'
+import * as commander from 'commander'
 import { writeFileSync } from 'fs'
 import getYaml from './getYaml'
 import { Scale, Skill } from './typings/Scale'
 import { safeDump } from 'js-yaml'
 import { set } from 'monolite'
+
+const command: { output?: string } & typeof commander = commander
 
 command
   .option(

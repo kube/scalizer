@@ -1,9 +1,11 @@
 #! /usr/bin/env node
 
-import * as command from 'commander'
+import * as commander from 'commander'
 import { writeFileSync } from 'fs'
 import { safeDump } from 'js-yaml'
 import getYaml from './getYaml'
+
+const command: { output?: string } & typeof commander = commander
 
 command
   .option(
