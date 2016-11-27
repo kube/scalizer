@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "main": "",
   "scripts": {
-    "build": "tsc && chmod +x bin/scalizer-*.js bin/index.js"
+    "build": "tsc && chmod +x bin/scalizer-*.js bin/index.js",
+    "prepublish": "tsc && chmod +x bin/scalizer-*.js bin/index.js"
   },
   "bin": {
     "scalizer": "bin/index.js"
