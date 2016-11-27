@@ -22,7 +22,7 @@ program
   )
   .option(
   '-o, --output <dir>',
-  'Output built scale to a file'
+  'save built scale to a file'
   )
   .action((headerFile, sectionsFiles, options) => {
     const header = getYaml(headerFile)
@@ -43,7 +43,7 @@ program
   )
   .option(
   '-o, --output <dir>',
-  'Output harmonize scale to a file'
+  'save harmonized scale to a file'
   )
   .action((scaleFile, options) => {
     const scale = getYaml(scaleFile)
@@ -63,7 +63,7 @@ program
   )
   .option(
   '-o, --output <dir>',
-  'Output formatted scale to a file'
+  'save formatted scale to a file'
   )
   .action((scaleFile, options) => {
     const scale = getYaml(scaleFile)
