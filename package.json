@@ -1,12 +1,12 @@
 {
-  "name": "scale-validator",
+  "name": "42scalizer",
   "version": "0.0.1",
   "main": "",
   "scripts": {
     "build": "tsc"
   },
   "bin": {
-    "42scale": "bin/index.js"
+    "42scalizer": "bin/index.js"
   },
   "license": "MIT",
   "dependencies": {

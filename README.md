@@ -1,5 +1,5 @@
-42scale
-=======
+42scalizer
+==========
 > 42 project scale validator and harmonizer
 
 Install
@@ -19,18 +19,18 @@ Commands
 Will output a scale containing all sections.
 
 ```sh
-42scale link d01.info.yml exercises/*.scale.yml
+42scalizer link d01.info.yml exercises/*.scale.yml
 ```
 
 
 ### `harmonize`
 **Harmonize scale correction points to give a total of 100 points**
 ```sh
-42scale harmonize scale.yml
+42scalizer harmonize scale.yml
 ```
 
 ### `format`
 **Format scale to 42 intra scale format**
 ```sh
-42scale format scale.yml
+42scalizer format scale.yml
 ```
