@@ -48,7 +48,7 @@ const harmonizeScale = (scale: Scale) =>
 const scale = getYaml(command.args[0])
 const harmonizedScale = safeDump(harmonizeScale(scale))
 
-if (command.options.output)
-  writeFileSync(command.options.output, harmonizedScale, { encoding: 'utf8' })
+if (command.output)
+  writeFileSync(command.output, harmonizedScale, { encoding: 'utf8' })
 else
   console.log(harmonizedScale)
