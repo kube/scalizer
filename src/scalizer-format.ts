@@ -24,3 +24,4 @@ command
     else
       console.log(scale)
   })
+  .parse(process.argv)

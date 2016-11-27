@@ -20,14 +20,16 @@ command
   '-o, --output <dir>',
   'save built scale to a file'
   )
-  .action((headerFile, sectionsFiles, options) => {
-    console.log("WORLD")
-    const header = getYaml(headerFile)
-    const sections = sectionsFiles ? sectionsFiles.map(getYaml) : []
-    const scale = linkScale(header, sections)
+  .parse(process.argv)
 
-    if (options.output)
-      writeFileSync(options.output, scale, { encoding: 'utf8' })
-    else
-      console.log(scale)
-  })
+
+const [headerFiles, ...sectionsFiles] = command.args.slice(0, -1)
+
+const header = getYaml(headerFiles)
+const sections = sectionsFiles ? sectionsFiles.map(getYaml) : []
+const scale = linkScale(header, sections)
+
+if (command.options.output)
+  writeFileSync(command.options.output, scale, { encoding: 'utf8' })
+else
+  console.log(scale)
