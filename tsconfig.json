@@ -4,6 +4,7 @@
     "target": "es6",
     "noImplicitAny": true,
     "noUnusedLocals": true,
+    "removeComments": true,
     "sourceMap": false,
     "rootDir": "src",
     "outDir": "bin"
