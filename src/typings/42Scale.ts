@@ -8,7 +8,7 @@
      ## ## ## :##
       ## ## ##*/
 
-// Types of a 42 scale
+// 42 intra scale format
 
 export type Skill = 'Adaptation & creativity'
   | 'Algorithms & AI'
@@ -38,6 +38,7 @@ export type Question = {
   position: number,
   guidelines: string,
   rating: 'bool' | 'multi',
+  kind: 'standard' | 'bonus',
   question_skills: QuestionSkill[]
 }
 
@@ -60,3 +61,5 @@ export type Scale = {
   duration: number,
   sections: Section[]
 }
+
+export default Scale
