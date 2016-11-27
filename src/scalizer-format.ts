@@ -1,73 +1,32 @@
 #! /usr/bin/env node
 
-import * as command from 'commander'
+import * as commander from 'commander'
 import { writeFileSync } from 'fs'
 import { safeDump } from 'js-yaml'
-import getYaml from './getYaml'
 
-import ScalizerScale, {
-  Section as ScalizerSection,
-  Question as ScalizerQuestion
-} from './typings/Scale'
+import getYaml from './lib/getYaml'
+import formatScale from './lib/format'
 
-import IntraScale, {
-  Section as IntraSection,
-  Question as IntraQuestion,
-  QuestionSkill
-} from './typings/42Scale'
-
-
-const formatQuestionSkills =
-  (skills: { [skill: string]: number }): QuestionSkill[] =>
-    Object.keys(skills).map(skillName => ({
-      percentage: skills[skillName],
-      name: skillName
-    }))
-
-const formatQuestion =
-  (question: ScalizerQuestion, index: number): IntraQuestion => ({
-    name: question.name,
-    position: index + 1,
-    guidelines: question.guidelines,
-    rating: question.rating || 'bool',
-    kind: question.bonus ? 'bonus' : 'standard',
-    questions_skills: formatQuestionSkills(question.skills)
-  })
-
-const formatSection =
-  (section: ScalizerSection, index: number): IntraSection => ({
-    name: section.name,
-    position: index + 1,
-    description: section.description || '',
-    questions: section.questions.map(formatQuestion)
-  })
-
-const formatScale =
-  (scale: ScalizerScale): IntraScale => ({
-    name: scale.name,
-    is_primary: true,
-    lg: scale.lang,
-    comment: '',
-    introduction_md: scale.introduction || '',
-    disclaimer_md: scale.disclaimer || '',
-    guidelines_md: scale.guidelines || '',
-    correction_number: scale.number_corrections,
-    duration: scale.duration,
-    sections: scale.sections.map(formatSection)
-  })
+const command = commander as {
+  output?: string
+} & typeof commander
 
 command
   .option(
   '-o, --output <dir>',
   'save formatted scale to a file'
   )
-  .action((scaleFile, options) => {
-    const scale = getYaml(scaleFile)
-    const formattedScale = safeDump(formatScale(scale))
-
-    if (options.output)
-      writeFileSync(options.output, formattedScale, { encoding: 'utf8' })
-    else
-      console.log(formattedScale)
-  })
   .parse(process.argv)
+
+// Format scale
+const [scaleFile] = command.args
+const scale = formatScale(getYaml(scaleFile))
+
+// Convert scale to YAML string for output
+const output = safeDump(scale)
+
+// Output or save scale depending on options
+if (command.output)
+  writeFileSync(command.output, output, { encoding: 'utf8' })
+else
+  console.log(output)

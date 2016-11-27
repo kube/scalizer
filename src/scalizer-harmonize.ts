@@ -2,56 +2,38 @@
 
 import * as commander from 'commander'
 import { writeFileSync } from 'fs'
-import getYaml from './getYaml'
-import { Scale, Skill } from './typings/Scale'
 import { safeDump } from 'js-yaml'
-import { set } from 'monolite'
 
-const command: { output?: string } & typeof commander = commander
+import getYaml from './lib/getYaml'
+import harmonizeScale from './lib/harmonize'
+import formatScale from './lib/format'
+
+const command = commander as {
+  output?: string
+  format?: boolean
+} & typeof commander
 
 command
   .option(
   '-o, --output <dir>',
-  'save harmonized scale to a file'
+  'save scale to a file'
+  )
+  .option(
+  '-f, --format',
+  'format scale for 42 intra'
   )
   .parse(process.argv)
 
-const getSkillPoints =
-  (scale: Scale, skill: Skill) =>
-    scale.sections
-      .map(section =>
-        section.questions
-          .map(question =>
-            question.skills[skill] || 0
-          )
-          .reduce((a, b) => a + b)
-      )
-      .reduce((a, b) => a + b)
-
-const updateSkillPoints =
-  (scale: Scale, skill: Skill, coefficient: number): Scale =>
-    set(scale, _ => _.sections)(sections =>
-      sections.map(section =>
-        set(section, _ => _.questions)(questions =>
-          questions.map(question =>
-            set(question, _ => _.skills[skill])(
-              ((question.skills[skill] || 0) * coefficient) | 0
-            )
-          )
-        )
-      )
-    )
-
-const harmonizeScale = (scale: Scale) =>
-  scale.skills.reduce((scale, skill) =>
-    updateSkillPoints(scale, skill, 100 / getSkillPoints(scale, skill))
-  , scale)
-
+// Harmonize scale and format if desired
 const [scaleFile] = command.args
-const scale = getYaml(scaleFile)
-const harmonizedScale = safeDump(harmonizeScale(scale))
+let scale: any = harmonizeScale(getYaml(scaleFile))
+scale = command.format ? formatScale(scale) : scale
 
+// Convert scale to YAML string for output
+const output = safeDump(scale)
+
+// Output or save scale depending on options
 if (command.output)
-  writeFileSync(command.output, harmonizedScale, { encoding: 'utf8' })
+  writeFileSync(command.output, output, { encoding: 'utf8' })
 else
-  console.log(harmonizedScale)
+  console.log(output)

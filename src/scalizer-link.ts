@@ -3,34 +3,47 @@
 import * as commander from 'commander'
 import { writeFileSync } from 'fs'
 import { safeDump } from 'js-yaml'
-import getYaml from './getYaml'
 
-const command: { output?: string } & typeof commander = commander
+import getYaml from './lib/getYaml'
+import linkScale from './lib/link'
+import harmonizeScale from './lib/harmonize'
+import formatScale from './lib/format'
+
+const command = commander as {
+  output?: string
+  harmonize?: boolean
+  format?: boolean
+} & typeof commander
 
 command
   .option(
   '-o, --output <dir>',
   'save built scale to a file'
   )
+  .option(
+  '-h, --harmonize',
+  'harmonize scale points'
+  )
+  .option(
+  '-f, --format',
+  'format scale for 42 intra'
+  )
   .parse(process.argv)
 
-const linkScale = (header: {}, sections: {}[]) =>
-  // Create a new object with header info, and sections
-  safeDump(
-    Object.assign(
-      {},
-      header,
-      { sections }
-    )
-  )
-
 const [headerFiles, ...sectionsFiles] = command.args.slice(0, -1)
-
 const header = getYaml(headerFiles)
 const sections = sectionsFiles ? sectionsFiles.map(getYaml) : []
-const scale = linkScale(header, sections)
 
+// Link scale and apply desired transformations
+let scale: any = linkScale(header, sections)
+scale = command.harmonize ? harmonizeScale(scale) : scale
+scale = command.format ? formatScale(scale) : scale
+
+// Convert scale to YAML string for output
+const output = safeDump(scale)
+
+// Output or save scale depending on options
 if (command.output)
-  writeFileSync(command.output, scale, { encoding: 'utf8' })
+  writeFileSync(command.output, output, { encoding: 'utf8' })
 else
-  console.log(scale)
+  console.log(output)
