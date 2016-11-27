@@ -30,7 +30,7 @@ export type Skill = 'Adaptation & creativity'
 
 export type QuestionSkill = {
   percentage: number,
-  name: Skill
+  name: string
 }
 
 export type Question = {
@@ -39,7 +39,7 @@ export type Question = {
   guidelines: string,
   rating: 'bool' | 'multi',
   kind: 'standard' | 'bonus',
-  question_skills: QuestionSkill[]
+  questions_skills: QuestionSkill[]
 }
 
 export type Section = {
