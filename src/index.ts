@@ -16,10 +16,7 @@ program
 
 
 program
-  .command(
-  'link <header> [sections...]',
-  'Link header and sections to scale'
-  )
+  .command('link <header> [sections...]')
   .option(
   '-o, --output <dir>',
   'save built scale to a file'
@@ -37,10 +34,7 @@ program
 
 
 program
-  .command(
-  'harmonize <file>',
-  'Harmonize scale correction points'
-  )
+  .command('harmonize <file>')
   .option(
   '-o, --output <dir>',
   'save harmonized scale to a file'
@@ -57,10 +51,7 @@ program
 
 
 program
-  .command(
-  'format <file>',
-  'Format scale for 42 intra'
-  )
+  .command('format <file>')
   .option(
   '-o, --output <dir>',
   'save formatted scale to a file'
