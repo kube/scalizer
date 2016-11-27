@@ -35,7 +35,7 @@ command
   )
   .parse(process.argv)
 
-const [headerFiles, ...sectionsFiles] = command.args.slice(0, -1)
+const [headerFiles, ...sectionsFiles] = command.args
 
 function task () {
   const header = getYaml(headerFiles)
