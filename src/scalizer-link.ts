@@ -59,8 +59,10 @@ function task () {
 // Watch change events if requested
 if (command.watch)
   [headerFiles, ...sectionsFiles].forEach(file =>
-    console.log('\n'.repeat(6)) ||
-    watchFile(file, task)
+    watchFile(file, () =>
+      console.log('\n'.repeat(6)) ||
+      task()
+    )
   )
 
 task()
