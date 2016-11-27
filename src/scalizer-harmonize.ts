@@ -45,7 +45,8 @@ const harmonizeScale = (scale: Scale) =>
     updateSkillPoints(scale, skill, 100 / getSkillPoints(scale, skill))
   , scale)
 
-const scale = getYaml(command.args[0])
+const [scaleFile] = command.args
+const scale = getYaml(scaleFile)
 const harmonizedScale = safeDump(harmonizeScale(scale))
 
 if (command.output)
