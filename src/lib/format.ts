@@ -53,8 +53,8 @@ const formatScale =
     introduction_md: scale.introduction || '',
     disclaimer_md: scale.disclaimer || '',
     guidelines_md: scale.guidelines || '',
-    correction_number: scale.number_corrections,
-    duration: scale.duration,
+    correction_number: scale.number_corrections || 3,
+    duration: scale.duration || 2,
     sections: scale.sections.map(formatSection)
   })
 
