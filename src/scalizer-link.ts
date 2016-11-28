@@ -8,12 +8,14 @@ import getYaml from './lib/getYaml'
 import linkScale from './lib/link'
 import harmonizeScale from './lib/harmonize'
 import formatScale from './lib/format'
+import displayStats from './lib/stats'
 
 const command = commander as {
   output?: string
   harmonize?: boolean
   format?: boolean
   watch?: boolean
+  stats?: boolean
 } & typeof commander
 
 command
@@ -32,6 +34,10 @@ command
   .option(
   '-w, --watch',
   'watch files and update on change'
+  )
+  .option(
+  '-s, --stats',
+  'display stats on points repartition'
   )
   .parse(process.argv)
 
@@ -54,6 +60,10 @@ function task () {
     writeFileSync(command.output, output, { encoding: 'utf8' })
   else
     console.log(output)
+
+  // Display stats if passed as flag
+  if (command.stats)
+    displayStats(scale)
 }
 
 // Watch change events if requested
