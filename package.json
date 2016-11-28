@@ -1,6 +1,6 @@
 {
   "name": "42scalizer",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "",
   "scripts": {
     "build": "tsc",
