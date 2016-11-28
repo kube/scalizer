@@ -39,10 +39,10 @@ const displaySkillStats =
         }
 
         // Display bar graphics for each section
-        const barLength = current.cumulated * 100 / current.total | 0
+        const percentage = current.cumulated * 100 / current.total | 0
         console.log(
-          bgGreen(green('*'.repeat(barLength)))
-            .concat(grey('-'.repeat(100 - barLength)))
+          (percentage >= 50 ? bgGreen(' ') : green('*')).repeat(percentage)
+            .concat(grey('-'.repeat(100 - percentage)))
             .concat(` ${section.name}`)
         )
         return current
