@@ -12,16 +12,16 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@types/colors": "^0.6.33",
+    "@types/colors": "^1.1.1",
     "colors": "^1.1.2",
     "commander": "^2.9.0",
     "js-yaml": "^3.7.0",
-    "monolite": "^0.1.6"
+    "monolite": "^0.1.7"
   },
   "devDependencies": {
     "@types/commander": "^2.3.31",
-    "@types/js-yaml": "^3.5.28",
-    "@types/node": "^6.0.51",
-    "typescript": "^2.0.10"
+    "@types/js-yaml": "^3.5.29",
+    "@types/node": "^6.0.58",
+    "typescript": "^2.1.4"
   }
 }
