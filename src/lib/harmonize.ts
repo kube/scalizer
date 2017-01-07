@@ -8,7 +8,7 @@
      ## ## ## :##
       ## ## ##*/
 
-import { set } from 'monolite'
+import { set, setMap } from 'monolite'
 import { Scale, Skill } from '../typings/ScalizerScale'
 
 const getSkillPoints =
@@ -21,17 +21,13 @@ const getSkillPoints =
 
 const updateSkillPoints =
   (scale: Scale, skill: Skill, coefficient: number): Scale =>
-    set(scale, _ => _.sections)(sections =>
-      sections.map(section =>
-        set(section, _ => _.questions)(questions =>
-          questions.map(question =>
+    setMap(scale, _ => _.sections)(section =>
+        setMap(section, _ => _.questions)(question =>
             set(question, _ => _.skills[skill])(
               ((question.skills[skill] || 0) * coefficient) | 0
             )
           )
         )
-      )
-    )
 
 export default (scale: Scale) =>
   scale.skills.reduce((scale, skill) =>
